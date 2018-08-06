@@ -5,13 +5,14 @@ import java.util.ArrayList;
  */
 public class Cube {
 
+    private final String[] FACES_NAMES={"Front","Back","Left","Right","Top","Bottom"};
     private final char RED='r';
     private final char BLUE='b';
     private final char GREEN='g';
     private final char ORANGE='o';
     private final char WHITE='w';
     private final char YELLOW='y';
-    private final int CUBE_SIZE =3;
+    private final int CUBE_SIZE = 3;
 
     private final char[] COLORS={RED,BLUE,GREEN,ORANGE,WHITE,YELLOW};
     private final int NUMBER_FACES=COLORS.length;
@@ -42,10 +43,11 @@ public class Cube {
     @Override
     public String toString(){
         String output="";
-        int currentFace=1;
+        int currentFace=0;
 
         for (char[][] face : faces) {
-            output+="\nFace number "+currentFace+"\n";
+            String faceName=FACES_NAMES[currentFace];
+            output+="\n"+faceName+" face \n";
             for (char[] line : face) {
                 for (char square : line) {
                     output+=square+" ";
