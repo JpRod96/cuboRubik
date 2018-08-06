@@ -16,7 +16,7 @@ public class Cube {
 
     private final char[] COLORS={RED,BLUE,GREEN,ORANGE,WHITE,YELLOW};
     private final int NUMBER_FACES=COLORS.length;
-    private ArrayList<char[][]> faces;
+    private ArrayList<Face> faces;
 
     public Cube(){
         faces=new ArrayList<>();
@@ -26,35 +26,18 @@ public class Cube {
     public void initializeCube(){
         for(int index=0;index<NUMBER_FACES;index++){
             char faceColor=COLORS[index];
-            faces.add(initializeFace(faceColor));
+            String faceName=FACES_NAMES[index];
+            faces.add(new Face(faceName,faceColor,CUBE_SIZE));
         }
-    }
-
-    private char[][] initializeFace(char faceColor){
-        char[][] face=new char[CUBE_SIZE][CUBE_SIZE];
-        for(int row=0; row<CUBE_SIZE; row++){
-            for (int columns=0;columns<CUBE_SIZE;columns++){
-                face[row][columns]=faceColor;
-            }
-        }
-        return face;
     }
 
     @Override
     public String toString(){
         String output="";
-        int currentFace=0;
 
-        for (char[][] face : faces) {
-            String faceName=FACES_NAMES[currentFace];
-            output+="\n"+faceName+" face \n";
-            for (char[] line : face) {
-                for (char square : line) {
-                    output+=square+" ";
-                }
-                output+="\n";
-            }
-            currentFace++;
+        for (Face face : faces) {
+            String faceName=face.getName();
+            output+="\n"+faceName+" face \n"+face;
         }
 
         return output;
