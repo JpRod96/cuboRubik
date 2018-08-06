@@ -9,4 +9,7 @@ public class Cube {
     private final char WHITE='w';
     private final char YELLOW='y';
     private final int CUBE_SIZE =3;
+    private final char[] COLORS={RED,BLUE,GREEN,ORANGE,WHITE,YELLOW};
+    private final int NUMBER_FACES=COLORS.length;
+    private ArrayList<char[][]> faces;
 }
