@@ -22,4 +22,40 @@ public class Face {
             }
         }
     }
+
+    @Override
+    public String toString(){
+        String output="";
+        for (char[] line : matrix) {
+            for (char square:line){
+                output+=square+" ";
+            }
+            output+="\n";
+        }
+        return output;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public char getFaceColor() {
+        return faceColor;
+    }
+
+    public void setFaceColor(char faceColor) {
+        this.faceColor = faceColor;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 }
