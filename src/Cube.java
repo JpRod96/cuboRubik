@@ -40,18 +40,58 @@ public class Cube {
         int firstRow=0;
         moveRow(firstRow,false);
     }
-
-    //TODO haz lo que queda huaquita, confio en ti <3
-    /*public void moveFirstColumnUp(){
+    public void moveFirstColumnDown(){
+        int firstColumn=0;
+        moveColumn(firstColumn,false);
+    }
+    public void moveFirstColumnUp(){
         int firstColumn=0;
         moveColumn(firstColumn,true);
     }
-
-    private void moveColumn(){
-
-    }*/
+    private void moveColumn(int columnNumber, boolean direction){
+        if(direction) {
+            char[] switchingColumn=faces.get(5).getColumn(columnNumber);
+            for(int faceNumber=0;faceNumber!=3;faceNumber=4-(faceNumber/2)){
+                    Face currentFace = faces.get(faceNumber);
+                    char[] oldColumn = currentFace.getColumn(columnNumber);
+                    currentFace.setColumn(columnNumber, switchingColumn);
+                    switchingColumn = oldColumn;
+            }
+            Face bottomFace=faces.get(5);
+            bottomFace.setColumn(columnNumber,switchingColumn);
+            if(columnNumber==0){
+                faces.get(2).rotateLeft();
+                faces.get(2).rotateLeft();
+            }
+            if(columnNumber==CUBE_SIZE-1){
+                faces.get(5).rotateRight();
+            }
+        }
+        else{
+            char[] switchingColumn=faces.get(5).getColumn(columnNumber);
+            for(int faceNumber=2;faceNumber<=4;faceNumber=faceNumber+2){
+                Face currentFace=faces.get(faceNumber);
+                char[] oldColumn=currentFace.getColumn(columnNumber);
+                currentFace.setColumn(columnNumber,switchingColumn);
+                switchingColumn=oldColumn;
+            }
+            Face frontFace=faces.get(0);
+            char[] oldFrontColumn=frontFace.getColumn(columnNumber);
+            frontFace.setColumn(columnNumber,switchingColumn);
+            Face bottomFace=faces.get(5);
+            bottomFace.setColumn(columnNumber,oldFrontColumn);
+            if(columnNumber==0){
+                faces.get(2).rotateRight();
+                faces.get(2).rotateRight();
+            }
+            if(columnNumber==CUBE_SIZE-1){
+                faces.get(5).rotateLeft();
+            }
+        }
+    }
 
     private void moveRow(int rowNumber, boolean direction){
+        //System.out.println(faces.get(0).getName()+"AAAAAAAAAAAAAA");
         if(direction){
             char[] switchingRow=faces.get(3).getRow(rowNumber);
             for(int faceNumber=0;faceNumber<4;faceNumber++){
