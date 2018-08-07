@@ -23,16 +23,56 @@ public class Face {
         }
     }
 
-    @Override
-    public String toString(){
-        String output="";
-        for (char[] line : matrix) {
-            for (char square:line){
-                output+=square+" ";
-            }
-            output+="\n";
+    public char[] getRow(int rowNumber){
+        return matrix[rowNumber];
+    }
+
+    public char[] getColumn(int columnNumber){
+        char[] column=new char[3];
+        for (int row=0; row<size;row++){
+            column[row]=matrix[row][columnNumber];
         }
-        return output;
+        return column;
+    }
+
+    public void setRow(int rowNumber, char[] newRow){
+        matrix[rowNumber]=newRow;
+    }
+
+    public void setColumn(int columnNumber, char[] newColumn){
+        for (int row=0; row<size;row++){
+            matrix[row][columnNumber]=newColumn[row];
+        }
+    }
+
+    public void rotateRight()
+    {
+        int newRow=0, newColumn;
+        char[][] resultingMatrix = new char [size][size];
+        for(int column=0; column<size;column++){
+            newColumn=0;
+            for(int row=size-1; row>=0;row--){
+                resultingMatrix[newRow][newColumn]=matrix[row][column];
+                newColumn++;
+            }
+            newRow++;
+        }
+        matrix=resultingMatrix;
+    }
+
+    public void rotateLeft()
+    {
+        int newRow=0, newColumn;
+        char[][] resultingMatrix = new char [size][size];
+        for(int column=size-1; column>=0;column--){
+            newColumn=0;
+            for(int row=0; row<size;row++){
+                resultingMatrix[newRow][newColumn]=matrix[row][column];
+                newColumn++;
+            }
+            newRow++;
+        }
+        matrix=resultingMatrix;
     }
 
     public String getName() {
@@ -57,5 +97,17 @@ public class Face {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    @Override
+    public String toString(){
+        String output="";
+        for (char[] line : matrix) {
+            for (char square:line){
+                output+=square+" ";
+            }
+            output+="\n";
+        }
+        return output;
     }
 }
